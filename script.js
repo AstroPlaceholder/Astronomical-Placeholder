@@ -35,6 +35,7 @@ const fetchPhotos = async (url) => {
     console.log('data:', data);
   }
 
+  // comments
 
   const url1 = "https://api.nasa.gov/planetary/apod?api_key=YQC8mJrAc8NDymYasHAaXGDaOQ1SzPcqERINxPmY" // base url
   const url2 = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_date=${currentDate}&api_key=${apiKey}` //url params are variables
