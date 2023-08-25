@@ -8,7 +8,7 @@ console.log("currentDate: " + currentDate)
 console.log("starting date: " + startRange)
 const gallery = document.querySelector("#gallery");
 
-function AppendPhotos (photos) {
+function AppendPhotos(photos) {
     for(let i = 0; i < photos.length; i++){
         const pictureCard = document.createElement("div") // create a div
         const pictureTitle = document.createElement("h2"); 
