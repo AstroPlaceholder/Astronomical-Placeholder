@@ -10,26 +10,45 @@ console.log("starting date: " + startRange)
 const gallery = document.querySelector("#gallery");
 
 
-function AppendPhotos(photos) {
-    for(let i = 0; i < photos.length; i++){
+function createGalleryItem(photo) {
+  const pictureCard = document.createElement("div");
+  pictureCard.classList.add("gallery-item");
 
-        const pictureCard = document.createElement("div") // create a div
-        const pictureTitle = document.createElement("h2"); 
-        const pictureImg = document.createElement("img");
-        pictureTitle.textContent = photos[i].title // change the text of the h2 tag to the title property of the photo
-        pictureImg.src = photos[i].hdurl // set image source url of the photo in the hdurl property
-        pictureCard.append(pictureImg, pictureTitle) // add the image element and h2 element to the div
-        gallery.append(pictureCard) // add the div to the gallery
-    }
+  const pictureImg = document.createElement("img");
+  pictureImg.src = photo.hdurl;
+
+  const pictureTitle = document.createElement("a");
+  pictureTitle.textContent = photo.title;
+  pictureTitle.classList.add("photo-title");
+  pictureTitle.href = `#`;
+
+  pictureCard.appendChild(pictureImg);
+  pictureCard.appendChild(pictureTitle);
+  pictureCard.dataset.date = `${photo.date}`
+  console.log(pictureCard.dataset.date)
+
+  return pictureCard;
 }
-const fetchPhotos = async (url) => {
-    const response = await fetch(url) // get data from Nasa
-    console.log(response)
-    const photos = await response.json() // convert the body of the response to an array of photos 
-    console.log('data:', photos);
-    AppendPhotos(photos)
 
+function AppendPhotos(photos) {
+  photos.forEach((photo) => {
+      const pictureCard = createGalleryItem(photo);
+      gallery.appendChild(pictureCard);
+  });
+}
+
+async function fetchPhotos(url){
+  try {
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.status}`);
+      }
+      const photos = await response.json();
+      AppendPhotos(photos);
+  } catch (error) {
+      console.error("Error fetching photos:", error);
   }
+};
 
   const testfetch = async (url) => {
     const response = await fetch(url)

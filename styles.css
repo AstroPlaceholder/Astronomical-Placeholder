@@ -1,7 +1,60 @@
 body {
     background-color: black;
-    color: white
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0; /* Remove default margin */
 }
+
+
+/* #gallery {
+    margin-left: 380px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center; /* Center the columns horizontally */
+    /* align-content: center; Center the rows vertically */
+/* } */ 
+
+/* #gallery h2 {
+    font-size: 16px
+} */
+
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-item {
+    margin: 10px;
+    text-align: center;
+    flex-basis: calc(33.33% - 20px);
+}
+
+.image-container {
+    margin-bottom: 5px; /* Add spacing between image and title */
+}
+
 img {
-    height: 120px;
+    height: 180px;
+}
+
+.title-container {
+    text-align: center;
+}
+
+.photo-title {
+    display: block; /* Make <a> tags appear as block elements (below the image) */
+    text-decoration: none;
+    color: white;
+}
+
+#gallery h2 {
+    font-size: 16px;
 }
