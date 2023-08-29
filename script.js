@@ -97,6 +97,62 @@ async function fetchPhotos(url){
   closeModalButton.addEventListener("click", () => {
     modal.close();
   });
+  function addToFavorites(photo) {
+    // Get existing favorites from local storage or initialize an empty array
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+    // Check if the photo is already in favorites by comparing the title
+    const isAlreadyFavorite = favorites.some((favorite) => favorite.title === photo.title);
+  
+    if (!isAlreadyFavorite) {
+      // Add the photo to favorites
+      favorites.push({
+        title: photo.title,
+        url: photo.hdurl,
+        explanation: photo.explanation,
+      });
+  
+      // Save the updated favorites to local storage
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+  
+      console.log('Added to favorites:', photo.title);
+    } else {
+      // Provide feedback that the photo is already in favorites
+      console.log('This photo is already in favorites:', photo.title);
+    }
+  }
+  const favoriteButton = document.querySelector("#favoriteButton");
+favoriteButton.addEventListener("click", () => {
+  // Get the current photo from the modal
+  const currentPhoto = {
+    title: modalTitle.textContent,
+    hdurl: modalImage.src,
+    explanation: modalExplanation.textContent,
+  };
+
+  // Add the current photo to favorites
+  addToFavorites(currentPhoto);
+});
+function showFavorites() {
+  // Get favorites from local storage
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
+
+  if (favorites && favorites.length > 0) {
+    console.log('Favorites:');
+    favorites.forEach((favorite, index) => {
+      console.log(`Favorite ${index + 1}:`);
+      console.log('Title:', favorite.title);
+      console.log('URL:', favorite.url);
+      console.log('Explanation:', favorite.explanation);
+      console.log('-------------------------');
+    });
+  } else {
+    console.log('You have no favorites yet.');
+  }
+}
+
+const showFavoritesButton = document.querySelector("#showFavoritesButton");
+showFavoritesButton.addEventListener("click", showFavorites);
 
   const url1 = "https://api.nasa.gov/planetary/apod?api_key=YQC8mJrAc8NDymYasHAaXGDaOQ1SzPcqERINxPmY" // base url
   const url2 = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_date=${currentDate}&api_key=${apiKey}` //url params are variables
