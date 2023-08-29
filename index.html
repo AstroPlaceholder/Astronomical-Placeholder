@@ -14,22 +14,33 @@
       </div>
   
       <div class="container">
-        <form class="add-form">
+        <form id="searchForm">
           <h3>Search for something</h3>
-  
-          <input
-            type="text"
-            name="name"
-            value=""
-            placeholder="Search"
-            class="input-text"
-          />
+          <input type="text" id="searchInput" placeholder="Enter a search term">
+          <button type="submit">Search</button>
         </form>
       </div>
       <h1>Stuff</h1>
       <div id="gallery">
         
       </div>
+      <!-- <dialog id="modal">
+        <img src="https://apod.nasa.gov/apod/image/2308/M66_JwstTomlinson_3521.jpg">
+        <h2>Title</h2>
+        <h5>Explanation</h5>
+      </dialog> -->
+      <dialog id="modal">
+        <img id="modalImage" src="https://apod.nasa.gov/apod/image/2308/M66_JwstTomlinson_3521.jpg" alt="APOD">
+        <h2 id="modalTitle">Title</h2>
+        <h5 id="modalExplanation">Explanation</h5>
+        <button id="favoriteButton">Favorite</button>
+        <button id="closeModal">Close</button>
+      </dialog>
     <script src="script.js"></script>
 </body>
 </html>
+
+<form id="searchForm">
+  <input type="text" id="searchInput" placeholder="Enter a search term">
+  <button type="submit">Search</button>
+</form>

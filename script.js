@@ -8,6 +8,17 @@ const startRange = startDate.format("YYYY-MM-DD"); // Format as 'YYYY-MM-DD'
 console.log("currentDate: " + currentDate)
 console.log("starting date: " + startRange)
 const gallery = document.querySelector("#gallery");
+const searchBar = document.querySelector("#search")
+const modal = document.querySelector("#modal")
+const modalImage = document.querySelector("#modalImage");
+const modalTitle = document.querySelector("#modalTitle");
+const modalExplanation = document.querySelector("#modalExplanation")
+const closeModalButton = document.querySelector("#closeModal");
+
+
+let obj = {
+  date: "454454"
+}
 
 
 function createGalleryItem(photo) {
@@ -17,15 +28,21 @@ function createGalleryItem(photo) {
   const pictureImg = document.createElement("img");
   pictureImg.src = photo.hdurl;
 
-  const pictureTitle = document.createElement("a");
+  const pictureTitle = document.createElement("p");
   pictureTitle.textContent = photo.title;
   pictureTitle.classList.add("photo-title");
-  pictureTitle.href = `#`;
 
   pictureCard.appendChild(pictureImg);
   pictureCard.appendChild(pictureTitle);
-  pictureCard.dataset.date = `${photo.date}`
-  console.log(pictureCard.dataset.date)
+  pictureCard.dataset.explanation = `${photo.explanation}`
+  // console.log(pictureCard.dataset.explanation)
+  pictureCard.addEventListener("click", (e) => {
+    console.log("Explanation:", pictureCard.dataset.explanation);
+    modalImage.src = photo.hdurl; // Update modal image source
+    modalTitle.textContent = photo.title; // Update modal title
+    modalExplanation.textContent = photo.explanation
+    modal.showModal(); // Open the modal
+  });
 
   return pictureCard;
 }
@@ -40,10 +57,12 @@ function AppendPhotos(photos) {
 async function fetchPhotos(url){
   try {
       const response = await fetch(url);
+      console.log("raw data" + response)
       if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
       }
       const photos = await response.json();
+      console.log(photos)
       AppendPhotos(photos);
   } catch (error) {
       console.error("Error fetching photos:", error);
@@ -56,8 +75,28 @@ async function fetchPhotos(url){
     const data = await response.json()
     console.log('data:', data);
   }
+  function Display(event) {
+    event.preventDefault(); // Prevent the form from submitting (which would reload the page)
+    gallery.innerHTML = ""
+  
+    const searchTerm = document.querySelector("#searchInput").value;
+    console.log("Search Term:", searchTerm);
+  
+    // You can use the search term in your further logic, such as updating the API request URL.
+    // Example:
+    // const updatedUrl = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_date=${currentDate}&api_key=${apiKey}&search=${searchTerm}`;
+    
+    // Call fetchPhotos with the updated URL.
+    // fetchPhotos(updatedUrl);
+  }
 
   // comments again
+
+  const searchForm = document.querySelector("#searchForm");
+  searchForm.addEventListener("submit", Display);
+  closeModalButton.addEventListener("click", () => {
+    modal.close();
+  });
 
   const url1 = "https://api.nasa.gov/planetary/apod?api_key=YQC8mJrAc8NDymYasHAaXGDaOQ1SzPcqERINxPmY" // base url
   const url2 = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_date=${currentDate}&api_key=${apiKey}` //url params are variables
@@ -65,5 +104,9 @@ async function fetchPhotos(url){
 
 
   fetchPhotos(url2)
+
+
+
+
 
 

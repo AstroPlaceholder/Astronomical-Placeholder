@@ -58,3 +58,6 @@ img {
 #gallery h2 {
     font-size: 16px;
 }
+#modal {
+    max-width: 500px
+}
