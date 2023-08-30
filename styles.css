@@ -71,5 +71,5 @@ img {
     left: 0;
     z-index: -1; /* Place the canvas behind other elements */
     pointer-events: none; /* Allows interactions with elements behind the canvas */
-    opacity: 0.5; /* Adjust the opacity to your preference */
+    /* opacity: ; Adjust the opacity to your preference */
   }

@@ -76,11 +76,11 @@ container.appendChild(canvas);
 
 const geometry = new THREE.PlaneGeometry(6, 6, 25, 5);
 const material = new THREE.MeshBasicMaterial({
-  // color: 0xff0000,
+  color: 0xff0000,
   map: loader.load("bg2.png")
 })
 const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+// scene.add(mesh)
 camera.position.z = 5
 
 const count = geometry.attributes.position.count;
@@ -94,12 +94,12 @@ function animate() {
   particles.position.y = -elapsedTime * 0.02;
 
   for(let i = 0; i < count; i++){
-    const x = geometry.attributes.position.getX(i)
-    const y = geometry.attributes.position.getY(i)
+    // const x = geometry.attributes.position.getX(i)
+    // const y = geometry.attributes.position.getY(i)
 
-    geometry.attributes.position.setZ(i, -y * time * 0.3)
-    geometry.computeVertexNormals()
-    geometry.attributes.position.needsUpdate = true
+    // geometry.attributes.position.setZ(i, -y * time * 0.3)
+    // geometry.computeVertexNormals()
+    // geometry.attributes.position.needsUpdate = true
   }
   requestAnimationFrame(animate)
   renderer.render(scene, camera)
@@ -271,17 +271,47 @@ function showFavorites() {
   const favorites = JSON.parse(localStorage.getItem("favorites"));
   if (favorites && favorites.length > 0) {
     console.log("Favorites:");
+    gallery.innerHTML = ""; // Clear the existing gallery content
+
     favorites.forEach((favorite, index) => {
       console.log(`Favorite ${index + 1}:`);
       console.log("Title:", favorite.title);
       console.log("URL:", favorite.url);
       console.log("Explanation:", favorite.explanation);
       console.log("-------------------------");
+
+      // Create a picture card for each favorite
+      const pictureCard = createFavoritePhoto(favorite);
+      gallery.appendChild(pictureCard);
     });
   } else {
     console.log("You have no favorites yet.");
   }
 }
+
+function createFavoritePhoto(favorite) {
+  const pictureCard = document.createElement("div");
+  pictureCard.classList.add("gallery-item");
+  const pictureImg = document.createElement("img");
+  pictureImg.src = favorite.url;
+  const pictureTitle = document.createElement("p");
+  pictureTitle.textContent = favorite.title;
+  pictureTitle.classList.add("photo-title");
+  pictureCard.appendChild(pictureImg);
+  pictureCard.appendChild(pictureTitle);
+  pictureCard.dataset.explanation = favorite.explanation;
+
+  pictureCard.addEventListener("click", (e) => {
+    console.log("Explanation:", pictureCard.dataset.explanation);
+    modalImage.src = favorite.url; // Update modal image source
+    modalTitle.textContent = favorite.title; // Update modal title
+    modalExplanation.textContent = favorite.explanation;
+    modal.showModal();
+  });
+
+  return pictureCard;
+}
+
 const showFavoritesButton = document.querySelector("#showFavoritesButton");
 showFavoritesButton.addEventListener("click", showFavorites);
 const url1 =
