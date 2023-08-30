@@ -7,6 +7,7 @@ let startDate = moment().subtract(daysBack, "days"); // get date from 2 weeks ag
 const startRange = startDate.format("YYYY-MM-DD"); // Format as 'YYYY-MM-DD'
 console.log("currentDate: " + currentDate);
 console.log("starting date: " + startRange);
+const apiKey = "YQC8mJrAc8NDymYasHAaXGDaOQ1SzPcqERINxPmY"
 const gallery = document.querySelector("#gallery");
 const searchBar = document.querySelector("#search");
 const modal = document.querySelector("#modal");
