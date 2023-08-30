@@ -35,6 +35,7 @@ body {
     margin: 10px;
     text-align: center;
     flex-basis: calc(33.33% - 20px);
+         /* flex-basis: calc(100% - 20px); */
 }
 
 .image-container {
@@ -61,3 +62,14 @@ img {
 #modal {
     max-width: 500px
 }
+/* canvas {
+    position: absolute;
+} */
+.background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place the canvas behind other elements */
+    pointer-events: none; /* Allows interactions with elements behind the canvas */
+    opacity: 0.5; /* Adjust the opacity to your preference */
+  }
