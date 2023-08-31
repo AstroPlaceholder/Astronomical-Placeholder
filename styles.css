@@ -2,7 +2,7 @@ body {
     background-color: black;
     color: white;
     font-family: Arial, sans-serif;
-    margin: 0; /* Remove default margin */
+    margin: 0; 
 }
 
 
@@ -51,7 +51,7 @@ img {
 }
 
 .photo-title {
-    display: block; /* Make <a> tags appear as block elements (below the image) */
+    display: block; 
     text-decoration: none;
     color: white;
 }
@@ -69,7 +69,38 @@ img {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1; /* Place the canvas behind other elements */
+    z-index: -1; 
     pointer-events: none; /* Allows interactions with elements behind the canvas */
-    /* opacity: ; Adjust the opacity to your preference */
   }
+  #searchForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+  .search-button {
+    margin: 0.5em;
+    border-radius: 50%;
+    border: none;
+    height: 44px;
+    width: 44px;
+    outline: none;
+    background: #7c7c7c2b ;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.search-button:hover {
+    background: #7c7c7c6b;
+}
+input {
+    min-width: 800px;
+    border: none;
+    outline: none;
+    padding: 0.4em 1em;
+    border-radius: 24px;
+    background: #faf0f02b;
+    color: white;
+    font-family: inherit;
+    font-size: 125%;
+
+}
