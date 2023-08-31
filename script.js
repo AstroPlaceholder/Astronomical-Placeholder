@@ -129,7 +129,7 @@ animate()
 
 
 
-function createGalleryItem(photo) {
+function createGalleryItem(photo, index) {
   const pictureCard = document.createElement("div");
   pictureCard.classList.add("gallery-item");
   const pictureImg = document.createElement("img");
@@ -148,11 +148,15 @@ function createGalleryItem(photo) {
     modalExplanation.textContent = photo.explanation;
     modal.showModal(); // Open the modal
   });
+  if(index <= 6) pictureCard.dataset.aos = "fade"
+  else pictureCard.dataset.aos = "slide-left"
+  let offset = index % 3 * 200 + 1000
+  pictureCard.setAttribute("data-aos-duration", `${offset}`)
   return pictureCard;
 }
 function AppendPhotos(photos) {
-  photos.forEach((photo) => {
-    const pictureCard = createGalleryItem(photo);
+  photos.forEach((photo, index) => {
+    const pictureCard = createGalleryItem(photo,index);
     gallery.appendChild(pictureCard);
   });
 }
@@ -189,7 +193,7 @@ async function Display(event) {
   console.log(search);
   console.log(search.collection.items);
   for (let i = 0; i < 10; i++) {
-    let pictureCard = createPhoto(search.collection.items[i]);
+    let pictureCard = createPhoto(search.collection.items[i], i);
     gallery.append(pictureCard);
     // console.log(search.collection.items[i].href)
     // console.log(search.collection.items[i].data[0].title)
@@ -202,7 +206,7 @@ async function Display(event) {
   // Call fetchPhotos with the updated URL.
   // fetchPhotos(updatedUrl);
 }
-function createPhoto(search) {
+function createPhoto(search, index) {
   console.log(search.links[0].href);
   const image = search.links[0].href;
   console.log(image);
@@ -226,6 +230,9 @@ function createPhoto(search) {
     modalExplanation.textContent = explanation;
     modal.showModal();
   });
+  pictureCard.dataset.aos = "slide-left"
+  let offset = index % 3 * 200 + 1000
+  pictureCard.setAttribute("data-aos-duration", `${offset}`)
   return pictureCard;
 }
 // comments again
@@ -282,7 +289,7 @@ function showFavorites() {
       console.log("-------------------------");
 
       // Create a picture card for each favorite
-      const pictureCard = createFavoritePhoto(favorite);
+      const pictureCard = createFavoritePhoto(favorite, index);
       gallery.appendChild(pictureCard);
     });
   } else {
@@ -290,7 +297,7 @@ function showFavorites() {
   }
 }
 
-function createFavoritePhoto(favorite) {
+function createFavoritePhoto(favorite, index) {
   const pictureCard = document.createElement("div");
   pictureCard.classList.add("gallery-item");
   const pictureImg = document.createElement("img");
@@ -301,6 +308,7 @@ function createFavoritePhoto(favorite) {
   pictureCard.appendChild(pictureImg);
   pictureCard.appendChild(pictureTitle);
   pictureCard.dataset.explanation = favorite.explanation;
+  pictureCard.dataset.aos = "slide-right"
 
   pictureCard.addEventListener("click", (e) => {
     console.log("Explanation:", pictureCard.dataset.explanation);
@@ -309,6 +317,9 @@ function createFavoritePhoto(favorite) {
     modalExplanation.textContent = favorite.explanation;
     modal.showModal();
   });
+  pictureCard.dataset.aos = "slide-left"
+  let offset = index % 3 * 200 + 1000
+  pictureCard.setAttribute("data-aos-duration", `${offset}`)
 
   return pictureCard;
 }
