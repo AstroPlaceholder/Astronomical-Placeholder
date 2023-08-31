@@ -68,7 +68,7 @@ img {
 .background-canvas {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 0; 
     z-index: -1; 
     pointer-events: none; /* Allows interactions with elements behind the canvas */
   }
@@ -104,3 +104,36 @@ input {
     font-size: 125%;
 
 }
+.standard-button {
+    --color: hsl(208, 72%, 39%);
+    background-color: black;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    border: 3px solid var(--color);
+    color: white;
+    padding: .5em 1em;
+    /* border-radius: 25em; */
+
+    position: relative;
+    isolation:  isolate;
+
+}
+
+.standard-button::after {
+ content: "";
+ position: absolute;
+ z-index: -1;
+ background: var(--color);
+ inset: 0;
+
+ scale: 0 1;
+ transform-origin: right;
+ transition: scale 450ms ;
+}
+.standard-button:hover::after,
+.button:focus-visible::after {
+    transform-origin: left;
+    scale: 1 1
+}
+
