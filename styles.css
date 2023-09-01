@@ -149,3 +149,135 @@ input {
     scale: 1 1
 }
 
+/* mobile view media query */
+@media (max-width:480px){
+    body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+    }
+    
+    #header {
+    
+     color: antiquewhite;
+    font-family:"Irish Grover" ;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+    }
+    
+    #gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .gallery-item {
+        margin: 10px;
+        text-align: center;
+         flex-basis: calc(100% - 20px); 
+    }
+    
+    .image-container {
+        margin-bottom: 5px; /* Add spacing between image and title */
+    }
+    
+    img {
+        height: 180px;
+    }
+    
+    .title-container {
+        text-align: center;
+    }
+    
+    .photo-title {
+        display: block; 
+        text-decoration: none;
+        color: white;
+    }
+    
+    #gallery h2 {
+        font-size: 16px;
+    }
+    #modal {
+        max-width: 500px
+    }
+    /* canvas {
+        position: absolute;
+    } */
+    .background-canvas {
+        position: fixed;
+        top: 0;
+        left: 0; 
+        z-index: -1; 
+        pointer-events: none; /* Allows interactions with elements behind the canvas */
+      }
+      #searchForm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+    }
+      .search-button {
+        margin: 0.5em;
+        border-radius: 50%;
+        border: none;
+        height: 44px;
+        width: 44px;
+        outline: none;
+        background: #7c7c7c2b ;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+    }
+    .search-button:hover {
+        background: #7c7c7c6b;
+    }
+    input {
+        min-width: 300px;
+        border: none;
+        outline: none;
+        padding: 0.4em 1em;
+        border-radius: 24px;
+        background: #faf0f02b;
+        color: white;
+        font-family: inherit;
+        font-size: 125%;
+    
+    }
+    .standard-button {
+        --color: hsl(208, 72%, 39%);
+        background-color: black;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        border: 3px solid var(--color);
+        color: white;
+        padding: .5em 1em;
+        /* border-radius: 25em; */
+    
+        position: relative;
+        isolation:  isolate;
+    
+    }
+    
+    .standard-button::after {
+     content: "";
+     position: absolute;
+     z-index: -1;
+     background: var(--color);
+     inset: 0;
+    
+     scale: 0 1;
+     transform-origin: right;
+     transition: scale 450ms ;
+    }
+    .standard-button:hover::after,
+    .button:focus-visible::after {
+        transform-origin: left;
+        scale: 1 1
+    }
+}
