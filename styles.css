@@ -49,6 +49,12 @@ font-size: 36px;
     flex-basis: calc(33.33% - 20px);
          /* flex-basis: calc(100% - 20px); */
 }
+img:hover {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out; 
+    cursor: pointer; 
+  }
 
 .image-container {
     margin-bottom: 5px; /* Add spacing between image and title */
@@ -206,15 +212,13 @@ input {
     #modal {
         max-width: 500px
     }
-    /* canvas {
-        position: absolute;
-    } */
+
     .background-canvas {
         position: fixed;
         top: 0;
         left: 0; 
         z-index: -1; 
-        pointer-events: none; /* Allows interactions with elements behind the canvas */
+        pointer-events: none; 
       }
       #searchForm {
         display: flex;
