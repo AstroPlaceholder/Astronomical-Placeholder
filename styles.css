@@ -155,6 +155,10 @@ input {
     scale: 1 1
 }
 
+#hidden {
+    display: none;
+}
+
 /* mobile view media query */
 @media (max-width:480px){
     body {

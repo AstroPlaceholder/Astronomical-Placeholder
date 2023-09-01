@@ -15,6 +15,9 @@ const modalImage = document.querySelector("#modalImage");
 const modalTitle = document.querySelector("#modalTitle");
 const modalExplanation = document.querySelector("#modalExplanation");
 const closeModalButton = document.querySelector("#closeModal");
+const backButton = document.getElementById("hidden")
+const favoriteButton = document.querySelector("#favoriteButton");
+favoriteButton.style.display = "none"
 // console.log(close)
 let obj = {
   date: "454454",
@@ -61,6 +64,7 @@ function resizeRenderer() {
 
 
 window.addEventListener("resize", resizeRenderer);
+backButton.addEventListener("click", fetchPhotos)
 
 // Initial call to set up the renderer and camera sizes
 resizeRenderer();
@@ -155,12 +159,17 @@ function createGalleryItem(photo, index) {
   return pictureCard;
 }
 function AppendPhotos(photos) {
+  gallery.innerHTML = ""
   photos.forEach((photo, index) => {
     const pictureCard = createGalleryItem(photo,index);
     gallery.appendChild(pictureCard);
   });
+  backButton.setAttribute('id', 'hidden')
+  favoriteButton.style.display = "inline-block"
+  
 }
-async function fetchPhotos(url) {
+async function fetchPhotos() {
+  let url = url2
   try {
     const response = await fetch(url);
     console.log("raw data" + response);
@@ -195,16 +204,10 @@ async function Display(event) {
   for (let i = 0; i < 10; i++) {
     let pictureCard = createPhoto(search.collection.items[i], i);
     gallery.append(pictureCard);
-    // console.log(search.collection.items[i].href)
-    // console.log(search.collection.items[i].data[0].title)
+
   }
-  // const searchTerm = document.querySelector("#searchInput").value;
-  // console.log("Search Term:", searchTerm);
-  // You can use the search term in your further logic, such as updating the API request URL.
-  // Example:
-  // const updatedUrl = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_date=${currentDate}&api_key=${apiKey}&search=${searchTerm}`;
-  // Call fetchPhotos with the updated URL.
-  // fetchPhotos(updatedUrl);
+  backButton.removeAttribute('id')
+
 }
 function createPhoto(search, index) {
   console.log(search.links[0].href);
@@ -263,7 +266,7 @@ function addToFavorites(photo) {
     console.log("This photo is already in favorites:", photo.title);
   }
 }
-const favoriteButton = document.querySelector("#favoriteButton");
+
 favoriteButton.addEventListener("click", () => {
   // Get the current photo from the modal
   const currentPhoto = {
@@ -295,6 +298,7 @@ function showFavorites() {
   } else {
     console.log("You have no favorites yet.");
   }
+  backButton.removeAttribute('id')
 }
 
 function createFavoritePhoto(favorite, index) {
@@ -332,4 +336,4 @@ const url2 = `https://api.nasa.gov/planetary/apod?start_date=${startRange}&end_d
 let url3 =
   "https://api.nasa.gov/planetary/apod?start_date=2023-08-11&end_date=2023-08-25&api_key=YQC8mJrAc8NDymYasHAaXGDaOQ1SzPcqERINxPmY"; // what the actual url will look like
 let url4 = "https://images-api.nasa.gov/search?q=sun&media_type=image";
-fetchPhotos(url2);
+fetchPhotos();
